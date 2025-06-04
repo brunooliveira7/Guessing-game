@@ -9,7 +9,6 @@ import { WORDS, type Challenge } from "./utils/words";
 import { useEffect, useState } from "react";
 
 export function App() {
-  const [attempts, setAttempts] = useState(0);
   const [challenge, setChallenge] = useState<Challenge | null>(null);
   const [score, setScore] = useState(0);
   const [letters, setLetters] = useState("");
@@ -24,8 +23,9 @@ export function App() {
     const randomWord = WORDS[index];
     setChallenge(randomWord);
 
-    setAttempts(0);
+    setScore(0);
     setLetters("");
+    setLettersUsed([]);
   }
 
   function handleConfirm() {
@@ -51,8 +51,10 @@ export function App() {
       .split("")
       .filter((char) => char === value).length;
 
-      const correct = hits > 0;
-      const currentScore =  score + hits
+    const correct = hits > 0;
+
+    //quantos acertos
+    const currentScore = score + hits;
 
     setLettersUsed((prevState) => [...prevState, { value, correct }]);
 
@@ -72,14 +74,25 @@ export function App() {
   return (
     <div className={styles.container}>
       <main>
-        <Header current={attempts} max={10} onRestart={handleRestartGame} />
+        <Header current={score} max={10} onRestart={handleRestartGame} />
 
         <Tip tip={challenge.tip} />
 
         <div className={styles.word}>
-          {challenge.word.split("").map(() => (
-            <Letter value="" />
-          ))}
+          {challenge.word.split("").map((letter, index) => {
+            const letterUsed = lettersUsed.find(
+              (used) =>
+                used.value.toLocaleUpperCase() === letter.toLocaleUpperCase()
+            );
+
+            return (
+              <Letter
+                key={index}
+                value={letterUsed?.value}
+                color={letterUsed?.correct ? "correct" : "default"}
+              />
+            );
+          })}
         </div>
 
         <h4>Palpite</h4>
