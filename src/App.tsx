@@ -6,7 +6,7 @@ import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { LettersUsed, type LettersUsedProps } from "./components/LettersUsed";
 import { WORDS, type Challenge } from "./utils/words";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 
 export function App() {
   const [challenge, setChallenge] = useState<Challenge | null>(null);
@@ -17,7 +17,11 @@ export function App() {
   const ATTEMPTS_MARGIN = 5;
 
   function handleRestartGame() {
-    console.log("Restart");
+   const isConfirmed = window.confirm("Do you want to restart the game?");
+
+   if (isConfirmed) {
+      starGame();
+    }
   }
 
   function starGame() {
@@ -45,7 +49,8 @@ export function App() {
     );
 
     if (exists) {
-      return alert(`Letter already used ${value}`);
+      setLetters("")
+      return alert(`Letter already used, ${value}.`);
     }
 
     const hits = challenge.word
@@ -65,9 +70,32 @@ export function App() {
     setLetters("");
   }
 
+  function endGame(message: string) {
+    alert(message);
+    starGame();
+  }
+
   useEffect(() => {
     starGame();
   }, []);
+
+  useEffect(() => {
+    if (!challenge) {
+      return;
+    }
+
+    setTimeout(() => {
+      if (score === challenge.word.length) {
+        return endGame("Congratulations! GG!");
+      }
+
+      const attemptLimit = challenge.word.length + ATTEMPTS_MARGIN;
+      if (lettersUsed.length === attemptLimit) {
+        return endGame("You lose! You used all attempts.");
+      }
+    }),
+      200;
+  }, [score, lettersUsed.length]);
 
   if (!challenge) {
     return;
