@@ -12,9 +12,7 @@ export function App() {
   const [attempts, setAttempts] = useState(0);
   const [challenge, setChallenge] = useState<Challenge | null>(null);
   const [letters, setLetters] = useState("");
-  const [lettersUsed, setLettersUsed] = useState<LettersUsedProps[]>([
-    { value: "R", correct: true },
-  ]);
+  const [lettersUsed, setLettersUsed] = useState<LettersUsedProps[]>([]);
 
   function handleRestartGame() {
     console.log("Restart");
@@ -37,6 +35,28 @@ export function App() {
     return;
   }
 
+  function handleConfirm() {
+    if (!challenge) {
+      return;
+    }
+
+    if (!letters.trim()) {
+      return alert("Type a letter");
+    }
+
+    const value = letters.toUpperCase();
+    const exists = lettersUsed.find(
+      (used) => used.value.toLocaleUpperCase() === value
+    );
+
+    if (exists) {
+      return alert(`Letter already used ${value}`);
+    }
+
+    setLettersUsed((prevState) => [...prevState, { value, correct: false }]);
+    setLetters("");
+  }
+
   return (
     <div className={styles.container}>
       <main>
@@ -53,9 +73,15 @@ export function App() {
         <h4>Palpite</h4>
 
         <div className={styles.guess}>
-          <Input autoFocus maxLength={1} placeholder="?" />
+          <Input
+            autoFocus
+            maxLength={1}
+            placeholder="?"
+            value={letters}
+            onChange={(e) => setLetters(e.target.value)}
+          />
 
-          <Button title="Confirmar" />
+          <Button title="Confirmar" onClick={handleConfirm} />
         </div>
 
         <LettersUsed data={lettersUsed} />
