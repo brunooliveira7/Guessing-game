@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 export function App() {
   const [attempts, setAttempts] = useState(0);
   const [challenge, setChallenge] = useState<Challenge | null>(null);
+  const [score, setScore] = useState(0);
   const [letters, setLetters] = useState("");
   const [lettersUsed, setLettersUsed] = useState<LettersUsedProps[]>([]);
 
@@ -25,14 +26,6 @@ export function App() {
 
     setAttempts(0);
     setLetters("");
-  }
-
-  useEffect(() => {
-    starGame();
-  }, []);
-
-  if (!challenge) {
-    return;
   }
 
   function handleConfirm() {
@@ -53,8 +46,27 @@ export function App() {
       return alert(`Letter already used ${value}`);
     }
 
-    setLettersUsed((prevState) => [...prevState, { value, correct: false }]);
+    const hits = challenge.word
+      .toLocaleUpperCase()
+      .split("")
+      .filter((char) => char === value).length;
+
+      const correct = hits > 0;
+      const currentScore =  score + hits
+
+    setLettersUsed((prevState) => [...prevState, { value, correct }]);
+
+    setScore(currentScore);
+
     setLetters("");
+  }
+
+  useEffect(() => {
+    starGame();
+  }, []);
+
+  if (!challenge) {
+    return;
   }
 
   return (
@@ -62,7 +74,7 @@ export function App() {
       <main>
         <Header current={attempts} max={10} onRestart={handleRestartGame} />
 
-        <Tip tip="Uma das linguagens de programação mais usadas no mundo" />
+        <Tip tip={challenge.tip} />
 
         <div className={styles.word}>
           {challenge.word.split("").map(() => (
