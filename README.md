@@ -2,7 +2,7 @@
 
 Um jogo de adivinhação de palavras (estilo "Forca") desenvolvido com **React + Vite**, onde o jogador deve descobrir uma palavra com base em uma dica. A cada tentativa, o jogo mostra se a letra está correta ou não, marcando as letras utilizadas com cores visuais intuitivas.
 
-## 🧠 Sobre o Projeto
+### 🧠 Sobre o Projeto
 
 Este projeto foi criado como um jogo interativo para treinar conceitos de React como:
 
@@ -12,7 +12,7 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
 - Validação de entradas e controle de fluxo de jogo
 - Estilização com CSS Modules
 
-## 🔍 Como Jogar
+### 🔍 Como Jogar
 
 - Você recebe uma **dica** relacionada à palavra secreta.
 - Digite uma **letra** por vez no campo de palpite e confirme.
@@ -22,7 +22,7 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
   - Você acerta todas as letras da palavra (**Vitória**)
   - Ou atinge o número máximo de tentativas (**Derrota**)
 
-## 🧩 Funcionalidades
+### 🧩 Funcionalidades
 
 - ✅ Geração aleatória de palavras e dicas.
 - ✅ Validação de letras únicas por tentativa.
@@ -32,14 +32,14 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
 - ✅ Botão para reiniciar o jogo com confirmação.
 - ✅ Componentes reutilizáveis (Input, Button, Header, Tip, Letter, LettersUsed).
 
-## 🚀 Tecnologias
+### 🚀 Tecnologias
 
 - React
 - Vite
 - TypeScript
 - CSS Modules
 
-## ✍️ Autor
+### ✍️ Autor
 Desenvolvido por Bruno Oliveira 🧠
 
 ## 📝 Licença
