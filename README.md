@@ -39,4 +39,10 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
 - TypeScript
 - CSS Modules
 
+## ✍️ Autor
+Desenvolvido por Bruno Oliveira 🧠
+
+## 📝 Licença
+Este projeto está sob a licença MIT.
+
 
