@@ -39,6 +39,12 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
 - TypeScript
 - CSS Modules
 
+---
+
+<p align="center">
+  <img alt="API Restaurant" src="">
+</p>
+
 ### ✍️ Autor
 Desenvolvido por Bruno Oliveira 🧠
 
