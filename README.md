@@ -42,7 +42,7 @@ Este projeto foi criado como um jogo interativo para treinar conceitos de React 
 ---
 
 <p align="center">
-  <img alt="API Restaurant" src="">
+  <img alt="API Restaurant" src="https://github.com/brunooliveira7/Guessing-game/blob/main/public/Guessing-game.png">
 </p>
 
 ### ✍️ Autor
